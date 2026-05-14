@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nexus League | Futbol Profesional</title>
+    <meta
+      name="description"
+      content="Premier League live scores, fixtures, standings and football news in a premium real-time dashboard."
+    />
+    <title>Premier Pulse | Premier League Live</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,214 +17,181 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="page-glow" aria-hidden="true"></div>
+    <div class="ambient-grid" aria-hidden="true"></div>
+    <div class="loading-bar" id="loadingBar" aria-hidden="true"></div>
 
-    <header class="site-header" id="inicio">
-      <nav class="navbar" aria-label="Navegacion principal">
-        <a class="brand" href="#inicio" aria-label="Nexus League inicio">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 48 48" role="img">
-              <path d="M24 4 42 14v20L24 44 6 34V14L24 4Z" />
-              <path d="M24 11 34 17v14l-10 6-10-6V17l10-6Z" />
-              <path d="M16 24h16M24 13v22" />
-            </svg>
+    <header class="site-header" id="top">
+      <nav class="navbar" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Premier Pulse home">
+          <span class="brand-mark" aria-hidden="true">PL</span>
+          <span class="brand-copy">
+            <strong>Premier Pulse</strong>
+            <small>Live League Center</small>
           </span>
-          <span class="brand-text">Nexus League</span>
         </a>
 
-        <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
         </button>
 
-        <div class="nav-links">
-          <a href="#inicio">Inicio</a>
-          <a href="#noticias">Noticias</a>
-          <a href="#equipos">Equipos</a>
-          <a href="#tabla">Tabla</a>
-          <a href="#jugadores">Jugadores</a>
-          <a href="#contacto">Contacto</a>
+        <div class="nav-links" id="navLinks">
+          <a href="#live">Live</a>
+          <a href="#table">Table</a>
+          <a href="#fixtures">Fixtures</a>
+          <a href="#news">News</a>
+          <a href="#setup">API Setup</a>
         </div>
       </nav>
 
       <section class="hero">
-        <div class="stadium-lights" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+        <div class="hero-media" aria-hidden="true">
+          <div class="floodlight light-left"></div>
+          <div class="floodlight light-right"></div>
+          <div class="pitch"></div>
         </div>
-        <div class="particles" aria-hidden="true"></div>
 
         <div class="hero-content reveal">
-          <p class="eyebrow">Temporada 2026 / Liga Elite</p>
-          <h1>El fútbol vive aquí</h1>
+          <p class="eyebrow">England / Premier League / Live data</p>
+          <h1>Every match. Every table swing. Live.</h1>
           <p class="hero-copy">
-            Noticias, estrellas, tabla y partidos simulados en una experiencia
-            hecha para sentir la energia de una noche continental.
+            A real Premier League match center powered by football APIs for live scores,
+            current standings, fixtures and breaking football news.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#simulador">Simular partido</a>
-            <a class="btn btn-secondary" href="#tabla">Ver posiciones</a>
+            <a class="btn btn-primary" href="#live">Open live center</a>
+            <button class="btn btn-secondary" id="refreshNow" type="button">Refresh data</button>
+          </div>
+          <div class="hero-meta">
+            <span id="lastUpdated">Waiting for API data</span>
+            <span id="dataHealth">Sources not checked</span>
           </div>
         </div>
 
-        <aside class="match-panel reveal" aria-label="Partido destacado">
-          <p class="panel-label">Partido destacado</p>
-          <div class="teams-row">
-            <span>Madrid Solaris</span>
-            <strong>21:00</strong>
-            <span>Inter Nova</span>
-          </div>
-          <div class="signal-bars" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
-          </div>
+        <aside class="command-card reveal">
+          <p class="panel-label">Real API status</p>
+          <div class="source-list" id="sourceStatus"></div>
         </aside>
       </section>
     </header>
 
     <main>
-      <section class="section news-section" id="noticias">
+      <section class="section live-section" id="live">
         <div class="section-heading reveal">
-          <p class="eyebrow">Ultimas noticias</p>
-          <h2>La actualidad de la liga</h2>
+          <div>
+            <p class="eyebrow">Live matches</p>
+            <h2>Premier League live center</h2>
+          </div>
+          <button class="icon-btn" id="refreshLive" type="button" aria-label="Refresh live matches">Refresh</button>
         </div>
-
-        <div class="news-grid">
-          <article class="news-card reveal">
-            <img class="news-visual" src="assets/news-derby.svg" alt="Estadio nocturno con luces azules durante un derbi" />
-            <div class="card-body">
-              <span class="tag">Derbi europeo</span>
-              <h3>Solaris remonta en una noche de alto voltaje</h3>
-              <p>
-                Un gol al minuto 88 cambia la carrera por el liderato y eleva
-                la intensidad de la fase final.
-              </p>
-            </div>
-          </article>
-
-          <article class="news-card reveal">
-            <img class="news-visual" src="assets/news-transfer.svg" alt="Presentacion premium de fichaje con fondo dorado" />
-            <div class="card-body">
-              <span class="tag">Mercado</span>
-              <h3>Atlas City prepara una oferta por Leon Valcarce</h3>
-              <p>
-                El mediocampista creativo podria convertirse en el fichaje mas
-                importante de la ventana.
-              </p>
-            </div>
-          </article>
-
-          <article class="news-card reveal">
-            <img class="news-visual" src="assets/news-tactics.svg" alt="Pizarra tactica iluminada sobre un campo profesional" />
-            <div class="card-body">
-              <span class="tag">Analisis</span>
-              <h3>La presion alta redefine el torneo</h3>
-              <p>
-                Los equipos con mayor recuperacion en campo rival dominan las
-                estadisticas ofensivas.
-              </p>
-            </div>
-          </article>
+        <div class="live-grid" id="liveMatches">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
         </div>
       </section>
 
-      <section class="section teams-band" id="equipos" aria-label="Equipos participantes">
-        <div class="ticker reveal">
-          <span>Madrid Solaris</span>
-          <span>Inter Nova</span>
-          <span>Atlas City</span>
-          <span>Royal Lisbon</span>
-          <span>Bayern Kronen</span>
-          <span>Olympique Azure</span>
-        </div>
-      </section>
-
-      <section class="section table-section" id="tabla">
+      <section class="section table-section" id="table">
         <div class="section-heading reveal">
-          <p class="eyebrow">Tabla general</p>
-          <h2>Posiciones</h2>
+          <div>
+            <p class="eyebrow">Standings</p>
+            <h2>Current table</h2>
+          </div>
+          <span class="section-note">Position, played, W-D-L, goal difference and points</span>
         </div>
-
-        <div class="standings-wrap reveal">
-          <table class="standings">
+        <div class="table-shell reveal">
+          <table class="standings" aria-label="Premier League standings">
             <thead>
               <tr>
-                <th>Equipo</th>
-                <th>PJ</th>
-                <th>G</th>
-                <th>E</th>
+                <th>Pos</th>
+                <th>Club</th>
                 <th>P</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>GD</th>
                 <th>Pts</th>
               </tr>
             </thead>
-            <tbody id="standingsBody"></tbody>
+            <tbody id="standingsBody">
+              <tr><td colspan="8">Loading table...</td></tr>
+            </tbody>
           </table>
         </div>
       </section>
 
-      <section class="section players-section" id="jugadores">
+      <section class="section fixtures-section" id="fixtures">
         <div class="section-heading reveal">
-          <p class="eyebrow">Talento de elite</p>
-          <h2>Jugadores destacados</h2>
+          <div>
+            <p class="eyebrow">Schedule</p>
+            <h2>Fixtures and results</h2>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Fixture filter">
+            <button class="tab" data-fixture-tab="today" type="button">Today</button>
+            <button class="tab is-active" data-fixture-tab="next" type="button">Next</button>
+            <button class="tab" data-fixture-tab="past" type="button">Results</button>
+          </div>
         </div>
-
-        <div class="players-grid" id="playersGrid"></div>
+        <div class="fixture-list reveal" id="fixturesList">
+          <div class="skeleton-row"></div>
+          <div class="skeleton-row"></div>
+          <div class="skeleton-row"></div>
+        </div>
       </section>
 
-      <section class="section simulator-section" id="simulador">
-        <div class="simulator reveal">
+      <section class="section news-section" id="news">
+        <div class="section-heading reveal">
           <div>
-            <p class="eyebrow">Match engine</p>
-            <h2>Simulador de partidos</h2>
+            <p class="eyebrow">Real news</p>
+            <h2>Premier League headlines</h2>
+          </div>
+          <span class="section-note">Powered by NewsAPI when connected</span>
+        </div>
+        <div class="news-grid" id="newsGrid">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </section>
+
+      <section class="section setup-section" id="setup">
+        <div class="setup-panel reveal">
+          <div>
+            <p class="eyebrow">Developer setup</p>
+            <h2>Connect real-time APIs</h2>
             <p>
-              Genera un marcador ficticio entre clubes de la Nexus League con
-              una animacion rapida estilo broadcast.
+              This page never invents football data. Add API keys in <code>config.js</code>
+              and the dashboard will pull live Premier League data automatically.
             </p>
           </div>
-
-          <div class="scoreboard" aria-live="polite">
-            <div class="score-team">
-              <span id="homeTeam">Madrid Solaris</span>
-              <strong id="homeScore">0</strong>
-            </div>
-            <span class="versus">VS</span>
-            <div class="score-team">
-              <span id="awayTeam">Inter Nova</span>
-              <strong id="awayScore">0</strong>
-            </div>
+          <div class="setup-grid">
+            <article>
+              <strong>football-data.org</strong>
+              <p>Standings, matches, scores and match status for competition code <code>PL</code>.</p>
+            </article>
+            <article>
+              <strong>TheSportsDB</strong>
+              <p>Premier League teams, badges, fixtures and public schedule metadata.</p>
+            </article>
+            <article>
+              <strong>NewsAPI</strong>
+              <p>Real football headlines, images, dates and article links.</p>
+            </article>
           </div>
-
-          <button class="btn btn-primary simulate-btn" id="simulateBtn" type="button">
-            Simular partido
-          </button>
-          <p class="winner" id="winnerText">Listo para el pitazo inicial.</p>
         </div>
       </section>
     </main>
 
-    <footer class="footer" id="contacto">
-      <div>
-        <a class="brand footer-brand" href="#inicio">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 48 48" role="img">
-              <path d="M24 4 42 14v20L24 44 6 34V14L24 4Z" />
-              <path d="M24 11 34 17v14l-10 6-10-6V17l10-6Z" />
-              <path d="M16 24h16M24 13v22" />
-            </svg>
-          </span>
-          <span class="brand-text">Nexus League</span>
-        </a>
-        <p>Futbol ficticio, energia real. Contacto: prensa@nexusleague.test</p>
-      </div>
-      <div class="footer-links" aria-label="Redes ficticias">
-        <a href="#noticias">Media Center</a>
-        <a href="#tabla">Stats Hub</a>
-        <a href="#jugadores">Scouting</a>
-      </div>
+    <footer class="footer">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">PL</span>
+        <span class="brand-copy">
+          <strong>Premier Pulse</strong>
+          <small>Expandable football data platform</small>
+        </span>
+      </a>
+      <p>Built for Premier League now. Ready for Champions League, advanced stats and fantasy later.</p>
     </footer>
 
+    <script src="config.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
