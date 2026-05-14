@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset=".56" stop-color="#09264a"/>
+      <stop offset="1" stop-color="#050712"/>
+    </linearGradient>
+    <radialGradient id="light" cx="50%" cy="22%" r="52%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset=".2" stop-color="#19a8ff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#19a8ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="960" height="600" fill="url(#sky)"/>
+  <circle cx="210" cy="120" r="180" fill="url(#light)"/>
+  <circle cx="750" cy="120" r="180" fill="url(#light)"/>
+  <path d="M0 335 Q480 210 960 335 L960 600 L0 600Z" fill="#07101d"/>
+  <path d="M120 382 Q480 278 840 382" fill="none" stroke="#d8b45f" stroke-width="8" opacity=".75"/>
+  <path d="M80 425 H880 L800 600 H160Z" fill="#13804d"/>
+  <path d="M180 600 L480 425 L780 600M480 425 V600M80 500 H880" stroke="#e9f5ff" stroke-opacity=".32" stroke-width="4"/>
+  <g opacity=".9">
+    <circle cx="455" cy="475" r="30" fill="#f5f7fb"/>
+    <path d="M455 445 479 461 470 490 440 490 431 461Z" fill="#07111f"/>
+  </g>
+</svg>
