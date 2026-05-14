@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+  <defs>
+    <linearGradient id="pitch" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#061626"/>
+      <stop offset=".55" stop-color="#0d5038"/>
+      <stop offset="1" stop-color="#08111f"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="600" fill="#050712"/>
+  <rect x="118" y="78" width="724" height="444" rx="12" fill="url(#pitch)" stroke="#d8b45f" stroke-width="6"/>
+  <path d="M480 78 V522M118 300 H842M270 188 H690 V412 H270Z" fill="none" stroke="#e9f5ff" stroke-opacity=".34" stroke-width="5"/>
+  <circle cx="480" cy="300" r="72" fill="none" stroke="#e9f5ff" stroke-opacity=".34" stroke-width="5"/>
+  <g fill="#19a8ff">
+    <circle cx="300" cy="170" r="20"/><circle cx="390" cy="250" r="20"/><circle cx="300" cy="430" r="20"/><circle cx="555" cy="335" r="20"/>
+  </g>
+  <g fill="#f0ce78">
+    <circle cx="660" cy="170" r="20"/><circle cx="590" cy="248" r="20"/><circle cx="690" cy="430" r="20"/><circle cx="420" cy="360" r="20"/>
+  </g>
+  <path d="M300 170 C365 210 480 210 590 248M420 360 C510 410 600 405 690 430" fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width="5" stroke-dasharray="12 12"/>
+</svg>
